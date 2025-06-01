@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Liver Disease Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: url('liver.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      color: #fff;
+      padding: 50px;
+      background-color: rgba(0,0,0,0.6);
+      background-blend-mode: darken;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #ff0000; /* liver-like amber color */
+    }
+    .content {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+      color: #fff;
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      background: #ff6f00;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #c75c00;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Liver Disease Prediction</h1>
+  <div class="content">
+    <form id="liverForm">
+      <label for="bilirubin">Bilirubin Level (mg/dL):</label>
+      <input type="number" id="bilirubin" name="bilirubin" min="0" max="30" step="0.1" required />
+
+      <label for="enzymes">Enzymes Level (U/L):</label>
+      <input type="number" id="enzymes" name="enzymes" min="0" max="1000" step="any" required />
+
+      <label for="proteins">Proteins Level (g/dL):</label>
+      <input type="number" id="proteins" name="proteins" min="0" max="10" step="0.1" required />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" min="1" max="120" required />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const liverForm = document.getElementById('liverForm');
+    const liverResult = document.getElementById('result');
+
+    liverForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+
+      const bilirubin = parseFloat(liverForm.bilirubin.value);
+      const enzymes = parseFloat(liverForm.enzymes.value);
+      const proteins = parseFloat(liverForm.proteins.value);
+      const age = parseInt(liverForm.age.value);
+
+      // Dummy logic for risk scoring
+      let riskScore = 0;
+      if (bilirubin > 1.2) riskScore++;
+      if (enzymes > 100) riskScore++;
+      if (proteins < 6) riskScore++;
+      if (age > 50) riskScore++;
+
+      let message = '';
+      if (riskScore >= 3) {
+        message = "High risk of Liver Disease. Please consult a doctor.";
+      } else if (riskScore >= 2) {
+        message = "Moderate risk of Liver Disease. Monitor your health.";
+      } else {
+        message = "Low risk of Liver Disease.";
+      }
+
+      liverResult.textContent = message;
+    });
+  </script>
+</body>
+</html>

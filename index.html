@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Disease Prediction Portal</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: url('front.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      color: #fff;
+    }
+    .overlay {
+      background-color: rgba(0, 0, 0, 0.6);
+      min-height: 100vh;
+      padding: 50px 20px;
+    }
+    .header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .header h1 {
+      font-size: 2.5rem;
+      color: #fff;
+    }
+    .cards-container {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    a.card {
+      background: rgba(255, 255, 255, 0.1);
+      border: 2px solid #fff;
+      border-radius: 20px;
+      padding: 40px 20px;
+      text-align: center;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #fff;
+      transition: all 0.3s ease-in-out;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 150px;
+    }
+    a.card:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="overlay">
+    <div class="header">
+      <h1>Disease Prediction System</h1>
+    </div>
+
+    <div class="cards-container">
+      <a class="card" href="stroke.html">Stroke</a>
+      <a class="card" href="breast_cancer.html">Breast Cancer</a>
+      <a class="card" href="diabetes.html">Diabetes</a>
+      <a class="card" href="heart.html">Heart Disease</a>
+      <a class="card" href="liver.html">Liver Disease</a>
+      <a class="card" href="kidney.html">Kidney Disease</a>
+    </div>
+  </div>
+</body>
+</html>

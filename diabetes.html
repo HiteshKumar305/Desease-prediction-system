@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Diabetes Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: url('diabetes.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      color: #fff;
+      padding: 50px;
+      background-color: rgba(0,0,0,0.6);
+      background-blend-mode: darken;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .content {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      background: #1687ea;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #0f5bb5;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Diabetes Prediction</h1>
+  <div class="content">
+    <form id="diabetesForm">
+      <label for="glucose">Glucose Level:</label>
+      <input type="number" id="glucose" name="glucose" required min="40" max="300" step="any" />
+
+      <label for="bmi">BMI:</label>
+      <input type="number" id="bmi" name="bmi" required min="10" max="70" step="any" />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required min="1" max="120" />
+
+      <label for="insulin">Insulin Level:</label>
+      <input type="number" id="insulin" name="insulin" required min="0" max="900" step="any" />
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('diabetesForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const glucose = parseFloat(form.glucose.value);
+      const bmi = parseFloat(form.bmi.value);
+      const age = parseInt(form.age.value);
+      const insulin = parseFloat(form.insulin.value);
+
+      // Simple dummy prediction logic
+      let riskScore = 0;
+      if(glucose > 140) riskScore += 2;
+      if(bmi > 30) riskScore += 2;
+      if(age > 45) riskScore += 1;
+      if(insulin < 16) riskScore += 1;
+
+      let message = '';
+      if(riskScore >= 4) {
+        message = "High risk of Diabetes. Please consult a doctor.";
+      } else if(riskScore >= 2) {
+        message = "Moderate risk of Diabetes. Monitor your health.";
+      } else {
+        message = "Low risk of Diabetes. Keep maintaining a healthy lifestyle.";
+      }
+
+      resultDiv.textContent = message;
+    });
+  </script>
+</body>
+</html>

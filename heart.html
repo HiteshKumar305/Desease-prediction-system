@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Heart Disease Prediction</title>
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      font-family: 'Open Sans', sans-serif;
+      background: url('heart2.jpg') no-repeat center center fixed;
+      background-size: cover;
+      min-height: 100vh;
+      color: #fff;
+      padding: 50px;
+      background-color: rgba(0,0,0,0.6);
+      background-blend-mode: darken;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .content {
+      max-width: 600px;
+      margin: 0 auto;
+      background: rgba(255,255,255,0.1);
+      padding: 20px 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+    label {
+      display: block;
+      margin: 15px 0 5px;
+    }
+    input, select {
+      width: 100%;
+      padding: 8px 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 1rem;
+    }
+    button {
+      margin-top: 20px;
+      background: #e03e36;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 1.1rem;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #b82a24;
+    }
+    .result {
+      margin-top: 25px;
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Heart Disease Prediction</h1>
+  <div class="content">
+    <form id="heartForm">
+      <label for="cholesterol">Cholesterol Level:</label>
+      <input type="number" id="cholesterol" name="cholesterol" required min="100" max="400" step="any" />
+
+      <label for="bp">Blood Pressure (BP):</label>
+      <input type="number" id="bp" name="bp" required min="60" max="200" step="any" />
+
+      <label for="age">Age:</label>
+      <input type="number" id="age" name="age" required min="1" max="120" />
+
+      <label for="smoking">Smoking Status:</label>
+      <select id="smoking" name="smoking" required>
+        <option value="">--Select--</option>
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+
+      <label for="diabetes">Diabetes (0 = No, 1 = Yes):</label>
+      <select id="diabetes" name="diabetes" required>
+        <option value="">--Select--</option>
+        <option value="0">No</option>
+        <option value="1">Yes</option>
+      </select>
+
+      <button type="submit">Predict</button>
+    </form>
+
+    <div id="result" class="result"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('heartForm');
+    const resultDiv = document.getElementById('result');
+
+    form.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const cholesterol = parseFloat(form.cholesterol.value);
+      const bp = parseFloat(form.bp.value);
+      const age = parseInt(form.age.value);
+      const smoking = form.smoking.value;
+      const diabetes = parseInt(form.diabetes.value);
+
+      // Simple dummy prediction logic
+      let riskScore = 0;
+      if (cholesterol > 240) riskScore += 2;
+      if (bp > 140) riskScore += 2;
+      if (age > 50) riskScore += 1;
+      if (smoking === 'yes') riskScore += 1;
+      if (diabetes === 1) riskScore += 1;
+
+      let message = '';
+      if (riskScore >= 5) {
+        message = "High risk of Heart Disease. Please consult a cardiologist.";
+      } else if (riskScore >= 3) {
+        message = "Moderate risk of Heart Disease. Monitor your lifestyle and health.";
+      } else {
+        message = "Low risk of Heart Disease. Keep maintaining a healthy lifestyle.";
+      }
+
+      resultDiv.textContent = message;
+    });
+  </script>
+</body>
+</html>
